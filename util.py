@@ -1,4 +1,5 @@
 import librosa
+import soundfile as sf
 from librosa.util import find_files
 from librosa import load
 
@@ -18,7 +19,7 @@ def LoadAudio(file_path) :
 def SaveAudio(file_path, mag, phase) :
     # mag = librosa.db_to_amplitude(mag)
     y = librosa.istft(mag*phase,win_length=window_size,hop_length=hop_length)
-    librosa.output.write_wav(file_path,y,SR,norm=True)
+    sf.write(file_path, y, SR)
     print("Save complete!! ", file_path)
     
 def SaveSpectrogram(y_mix, y_bass, y_drums, y_other, y_vocal, filename, orig_sr=44100) :

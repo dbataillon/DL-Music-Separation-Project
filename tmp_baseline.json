@@ -1,0 +1,56 @@
+{
+  "dataset_root": "tmp_dsd100",
+  "subset": "Dev",
+  "checkpoint": "model/checkpoint_epoch_0001.pt",
+  "metrics": {
+    "vocal": {
+      "SDR": {
+        "mean": -9.3359375,
+        "std": 0.0,
+        "ci95": 0.0
+      },
+      "SI_SDR": {
+        "mean": -5.5786566734313965,
+        "std": 0.0,
+        "ci95": 0.0
+      }
+    },
+    "bass": {
+      "SDR": {
+        "mean": -10.194178581237793,
+        "std": 0.0,
+        "ci95": 0.0
+      },
+      "SI_SDR": {
+        "mean": -18.08544921875,
+        "std": 0.0,
+        "ci95": 0.0
+      }
+    },
+    "drums": {
+      "SDR": {
+        "mean": -14.909829139709473,
+        "std": 0.0,
+        "ci95": 0.0
+      },
+      "SI_SDR": {
+        "mean": -35.22739028930664,
+        "std": 0.0,
+        "ci95": 0.0
+      }
+    },
+    "other": {
+      "SDR": {
+        "mean": -12.698410987854004,
+        "std": 0.0,
+        "ci95": 0.0
+      },
+      "SI_SDR": {
+        "mean": -36.55796813964844,
+        "std": 0.0,
+        "ci95": 0.0
+      }
+    }
+  },
+  "average_inference_seconds": 2.0744457244873047
+}

@@ -7,3 +7,5 @@ __pycache__
 ./model
 ./model_*
 .ipynb_checkpoints
+.DS_Store
+data/
