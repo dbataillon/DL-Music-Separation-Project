@@ -8,7 +8,7 @@ from torch.utils.data import TensorDataset, DataLoader
 
 # Your utilities & config (same ones the TF script used)
 from util import LoadSpectrogram, Magnitude_phase_x, Magnitude_phase_y, sampling
-from config import EPOCH, BATCH, LEARNING_RATE, image_width
+from configs.config import EPOCH, BATCH, LEARNING_RATE, image_width
 
 # Your PyTorch U-Net (standard Conv->BN->ReLU order)
 from U_net import UNetStandard

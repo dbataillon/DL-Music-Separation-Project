@@ -4,7 +4,7 @@ import torch
 import librosa
 
 from util import LoadAudio, SaveAudio
-from config import image_width, patch_size
+from configs.config import image_width, patch_size
 from U_net import UNetStandard
 
 def get_device():
