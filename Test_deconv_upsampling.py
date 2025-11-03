@@ -4,7 +4,7 @@ from librosa.util import find_files
 from librosa import load
 
 from util import *
-from config import *
+from configs.config import *
 from U_net_deconv_upsampling import U_Net
 
 

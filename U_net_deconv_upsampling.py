@@ -1,6 +1,6 @@
 import tensorflow as tf
 from tensorflow.keras.layers import concatenate 
-from config import *
+from configs.config import *
 
 def U_Net(features, labels, mode) :
     # Input Layer 

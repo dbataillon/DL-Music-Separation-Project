@@ -5,7 +5,7 @@ from librosa import load
 
 import os, re 
 import numpy as np
-from config import *
+from configs.config import *
 
 def LoadAudio(file_path) :
     y, sr = load(file_path,sr=SR)

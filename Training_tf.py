@@ -3,7 +3,7 @@ import tensorflow as tf
 from U_net import U_Net
 # from U_net_deconv_upsampling import U_Net
 from util import *
-from config import *
+from configs.config import *
 
 
 def train() : 
