@@ -3,10 +3,9 @@ import librosa
 from librosa.util import find_files
 from librosa import load
 
-from util import *
+from data.util import *
 from configs.config import *
-from U_net import U_Net
-# from U_net_deconv_upsampling import U_Net
+from models.U_net_deconv_upsampling import U_Net
 
 
 def main() :
@@ -24,7 +23,8 @@ def main() :
     
     predict_input_fn = tf.estimator.inputs.numpy_input_fn(x = {"mag":X},y = None,num_epochs = 1,shuffle = False)
 
-    deep_u_net = tf.estimator.Estimator(model_fn=U_Net,model_dir="./model")
+    
+    deep_u_net = tf.estimator.Estimator(model_fn=U_Net,model_dir="./model_deconv_upsampling")
     predictions = list(deep_u_net.predict(input_fn=predict_input_fn))
     mask = predictions[0]['outputs']
     mask = np.einsum('ijk->kij', mask)

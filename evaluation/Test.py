@@ -3,9 +3,9 @@ import numpy as np
 import torch
 import librosa
 
-from util import LoadAudio, SaveAudio
+from data.util import LoadAudio, SaveAudio
 from configs.config import image_width, patch_size
-from U_net import UNetStandard
+from models.U_net import UNetStandard
 
 def get_device():
     if torch.backends.mps.is_available():

@@ -1,7 +1,7 @@
 import tensorflow as tf
 
-from U_net_deconv_upsampling import U_Net
-from util import *
+from models.U_net_deconv_upsampling import U_Net
+from data.util import *
 from configs.config import *
 
 

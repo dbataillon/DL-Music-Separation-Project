@@ -16,10 +16,10 @@ I prepare CCMixter datasets in "./data" and Each track consisted of Mixed, bass,
 <pre><code>$ python CCMixter_process.py --DATADIR ./data </code></pre>
 
 ## Usage
-- Train
-<pre><code>$ python Training.py</code></pre>
+- Train (run everything from repo root and import via packages)
+<pre><code>$ python -m training.Training.py</code></pre>
 - Test
-<pre><code>$ python Test.py</code></pre>
+<pre><code>$ python -m evaluation.Test.py</code></pre>
 
 ## Paper
 Jaehoon Oh et al. [spectrogram-channels u-net: a source separation model viewing each channel as the spectrogram of each source](https://arxiv.org/abs/1810.11520)

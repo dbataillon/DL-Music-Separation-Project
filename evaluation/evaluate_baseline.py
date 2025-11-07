@@ -13,8 +13,8 @@ try:
 except ImportError as exc:  # pragma: no cover - handled at runtime
     raise ImportError("museval is required for evaluation. Install with `pip install museval`.") from exc
 
-from config import SR, window_size, hop_length, patch_size
-from U_net import UNetStandard
+from configs.config import SR, window_size, hop_length, patch_size
+from models.U_net import UNetStandard
 
 
 STEM_ORDER = ("vocal", "bass", "drums", "other")
