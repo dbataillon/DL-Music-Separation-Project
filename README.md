@@ -9,17 +9,17 @@ This is an implementation of U-Net for vocal, bass, drums separation with tensor
 
 ## Download Dataset
 I download [dsd100](https://sigsep.github.io/datasets/dsd100.html) dataset.
-<pre><code>$ python download_data.py --DATADIR ./data </code></pre>
+<pre><code>$ python -m preprocessing.download_data --DATADIR ./data </code></pre>
 
 ## Data
 I prepare CCMixter datasets in "./data" and Each track consisted of Mixed, bass, drums, other, vocal version
-<pre><code>$ python CCMixter_process.py --DATADIR ./data </code></pre>
+<pre><code>$ python -m preprocessing.CCMixter_process --DATADIR ./data </code></pre>
 
 ## Usage
-- Train (run everything from repo root and import via packages)
-<pre><code>$ python -m training.Training.py</code></pre>
+- Train (run everything from repo root so package imports resolve)
+<pre><code>$ python -m training.Training</code></pre>
 - Test
-<pre><code>$ python -m evaluation.Test.py</code></pre>
+<pre><code>$ python -m evaluation.Test</code></pre>
 
 ## Paper
 Jaehoon Oh et al. [spectrogram-channels u-net: a source separation model viewing each channel as the spectrogram of each source](https://arxiv.org/abs/1810.11520)

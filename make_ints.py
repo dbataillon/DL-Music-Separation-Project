@@ -3,7 +3,7 @@
 
 from pydub import AudioSegment
 import os
-from data.input_parameter import get_args
+from preprocessing.input_parameter import get_args
 
 args = get_args()
 sound_dir = os.path.join(args.DATADIR, 'DSD100/Sources/Dev')

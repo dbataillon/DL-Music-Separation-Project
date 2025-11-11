@@ -2,7 +2,7 @@ import torch, math, numpy as np
 import torch.nn.functional as F
 from torch.utils.data import DataLoader, TensorDataset
 from models.diffusion_model import DiffusionUNet
-from data.util import LoadSpectrogram, Magnitude_phase_x, Magnitude_phase_y, sampling
+from preprocessing.util import LoadSpectrogram, Magnitude_phase_x, Magnitude_phase_y, sampling
 from configs.config import EPOCH, BATCH, LEARNING_RATE
 
 def make_cosine_schedule(T=1000, s=0.008):

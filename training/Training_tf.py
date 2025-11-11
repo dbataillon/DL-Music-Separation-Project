@@ -2,7 +2,7 @@ import tensorflow as tf
 
 from models.U_net import U_Net
 # from U_net_deconv_upsampling import U_Net
-from data.util import *
+from preprocessing.util import *
 from configs.config import *
 
 

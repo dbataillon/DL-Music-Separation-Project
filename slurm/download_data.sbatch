@@ -11,14 +11,16 @@
 set -euo pipefail
 
 module load anaconda3
+CONDA_BASE="$(conda info --base)"
+source "${CONDA_BASE}/etc/profile.d/conda.sh"
 conda activate freqnet
+
 PROJECT_DIR="/home/hice1/etarr7/scratch/DL-Music-Separation-Project"
 DATADIR="${PROJECT_DIR}/data"
-ENV_NAME="freqnet"
 
 mkdir -p "${PROJECT_DIR}/logs"
 mkdir -p "${DATADIR}"
 
 cd "${PROJECT_DIR}"
 
-python download_data.py --DATADIR "${DATADIR}"
+python -m preprocessing.download_data --DATADIR "${DATADIR}"

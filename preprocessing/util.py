@@ -3,7 +3,8 @@ import soundfile as sf
 from librosa.util import find_files
 from librosa import load
 
-import os, re 
+import os
+import re 
 import numpy as np
 from configs.config import *
 
@@ -22,7 +23,8 @@ def SaveAudio(file_path, mag, phase) :
     sf.write(file_path, y, SR)
     print("Save complete!! ", file_path)
     
-def SaveSpectrogram(y_mix, y_bass, y_drums, y_other, y_vocal, filename, orig_sr=44100) :
+def SaveSpectrogram(y_mix, y_bass, y_drums, y_other, y_vocal, filename, orig_sr=44100, out_dir='./Spectrogram') :
+    os.makedirs(out_dir, exist_ok=True)
     y_mix = librosa.core.resample(y_mix,orig_sr,SR)
     y_vocal = librosa.core.resample(y_vocal,orig_sr,SR)
     y_bass = librosa.core.resample(y_bass,orig_sr,SR)
@@ -42,10 +44,18 @@ def SaveSpectrogram(y_mix, y_bass, y_drums, y_other, y_vocal, filename, orig_sr=
     S_other /= norm
     S_vocal /= norm
     
-    np.savez(os.path.join('./Spectrogram',filename+'.npz'),mix=S_mix, drums=S_drums, bass=S_bass, other=S_other, vocal=S_vocal)
+    final_path = os.path.join(out_dir, filename + '.npz')
+    tmp_path = final_path + '.tmp'
+    np.savez(tmp_path, mix=S_mix, drums=S_drums, bass=S_bass, other=S_other, vocal=S_vocal)
+    os.replace(tmp_path, final_path)
     
 def LoadSpectrogram() :
-    filelist = find_files('./Spectrogram', ext="npz")
+    filelist = sorted(find_files('./Spectrogram', ext="npz"))
+    if not filelist:
+        raise FileNotFoundError(
+            "No cached spectrograms found in ./Spectrogram. "
+            "Run preprocessing/CCMixter_process.py to generate them."
+        )
     x_list = []
     y_list = []
     for file in filelist :

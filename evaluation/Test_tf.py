@@ -3,7 +3,7 @@ import librosa
 from librosa.util import find_files
 from librosa import load
 
-from data.util import *
+from preprocessing.util import *
 from configs.config import *
 from models.U_net import U_Net
 # from U_net_deconv_upsampling import U_Net
