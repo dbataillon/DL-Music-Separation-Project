@@ -19,7 +19,7 @@ from configs.config import SR, window_size, hop_length, patch_size
 from models.U_net import UNetStandard
 
 
-STEM_ORDER = ("vocal", "bass", "drums", "other")
+STEM_ORDER = ("vocals", "bass", "drums", "other")
 
 
 def get_device() -> torch.device:

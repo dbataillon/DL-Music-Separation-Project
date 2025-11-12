@@ -1,0 +1,89 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/storage/ice1/5/1/etarr7/DL-Music-Separation-Project/evaluation/evaluate_all_epochs.py", line 14, in <module>
+    from museval.metrics import bss_eval_sources
+  File "/home/hice1/etarr7/.conda/envs/freqnet/lib/python3.11/site-packages/museval/__init__.py", line 7, in <module>
+    import musdb
+  File "/home/hice1/etarr7/.conda/envs/freqnet/lib/python3.11/site-packages/musdb/__init__.py", line 1, in <module>
+    from .audio_classes import MultiTrack, Source, Target
+  File "/home/hice1/etarr7/.conda/envs/freqnet/lib/python3.11/site-packages/musdb/audio_classes.py", line 3, in <module>
+    import stempeg
+  File "/home/hice1/etarr7/.conda/envs/freqnet/lib/python3.11/site-packages/stempeg/__init__.py", line 16, in <module>
+    from .read import read_stems
+  File "/home/hice1/etarr7/.conda/envs/freqnet/lib/python3.11/site-packages/stempeg/read.py", line 7, in <module>
+    from stempeg.write import FilesWriter
+  File "/home/hice1/etarr7/.conda/envs/freqnet/lib/python3.11/site-packages/stempeg/write.py", line 23, in <module>
+    from .cmds import FFMPEG_PATH, mp4box_exists, get_aac_codec, find_cmd
+  File "/home/hice1/etarr7/.conda/envs/freqnet/lib/python3.11/site-packages/stempeg/cmds.py", line 43, in <module>
+    raise RuntimeError(
+RuntimeError: ffmpeg or ffprobe could not be found! Please install them before using stempeg. See: https://github.com/faroit/stempeg
+Evaluating on device: cuda
+Found 141 checkpoints to evaluate
+Using 1 worker (sequential evaluation)
+
+=== Evaluating Epoch 0001 ===
+/storage/ice1/5/1/etarr7/DL-Music-Separation-Project/evaluation/evaluate_all_epochs.py:35: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state = torch.load(checkpoint_path, map_location=device)
+/storage/ice1/5/1/etarr7/DL-Music-Separation-Project/evaluation/evaluate_all_epochs.py:142: UserWarning: PySoundFile failed. Trying audioread instead.
+  target_audio, _ = librosa.load(stem_path, sr=SR)
+/home/hice1/etarr7/.conda/envs/freqnet/lib/python3.11/site-packages/librosa/core/audio.py:184: FutureWarning: librosa.core.audio.__audioread_load
+	Deprecated as of librosa version 0.10.0.
+	It will be removed in librosa version 1.0.
+  y, sr_native = __audioread_load(path, offset, duration, dtype)
+Traceback (most recent call last):
+  File "/home/hice1/etarr7/.conda/envs/freqnet/lib/python3.11/site-packages/librosa/core/audio.py", line 176, in load
+    y, sr_native = __soundfile_load(path, offset, duration, dtype)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hice1/etarr7/.conda/envs/freqnet/lib/python3.11/site-packages/librosa/core/audio.py", line 209, in __soundfile_load
+    context = sf.SoundFile(path)
+              ^^^^^^^^^^^^^^^^^^
+  File "/home/hice1/etarr7/.conda/envs/freqnet/lib/python3.11/site-packages/soundfile.py", line 690, in __init__
+    self._file = self._open(file, mode_int, closefd)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hice1/etarr7/.conda/envs/freqnet/lib/python3.11/site-packages/soundfile.py", line 1265, in _open
+    raise LibsndfileError(err, prefix="Error opening {0!r}: ".format(self.name))
+soundfile.LibsndfileError: Error opening '/home/hice1/etarr7/scratch/DL-Music-Separation-Project/data/DSD100/Sources/Dev/051 - AM Contra - Heart Peripheral/vocal.wav': System error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/storage/ice1/5/1/etarr7/DL-Music-Separation-Project/evaluation/evaluate_all_epochs.py", line 407, in <module>
+    main()
+  File "/storage/ice1/5/1/etarr7/DL-Music-Separation-Project/evaluation/evaluate_all_epochs.py", line 359, in main
+    result = evaluate_single_epoch((ckpt_path, epoch, args.dataset_root, args.subset, args.model_dir))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/ice1/5/1/etarr7/DL-Music-Separation-Project/evaluation/evaluate_all_epochs.py", line 258, in evaluate_single_epoch
+    metrics = evaluate_track(model, device, mix_path, stem_dir)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/ice1/5/1/etarr7/DL-Music-Separation-Project/evaluation/evaluate_all_epochs.py", line 142, in evaluate_track
+    target_audio, _ = librosa.load(stem_path, sr=SR)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hice1/etarr7/.conda/envs/freqnet/lib/python3.11/site-packages/librosa/core/audio.py", line 184, in load
+    y, sr_native = __audioread_load(path, offset, duration, dtype)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hice1/etarr7/.conda/envs/freqnet/lib/python3.11/site-packages/decorator.py", line 235, in fun
+    return caller(func, *(extras + args), **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hice1/etarr7/.conda/envs/freqnet/lib/python3.11/site-packages/librosa/util/decorators.py", line 59, in __wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hice1/etarr7/.conda/envs/freqnet/lib/python3.11/site-packages/librosa/core/audio.py", line 240, in __audioread_load
+    reader = audioread.audio_open(path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hice1/etarr7/.conda/envs/freqnet/lib/python3.11/site-packages/audioread/__init__.py", line 126, in audio_open
+    return BackendClass(path)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/hice1/etarr7/.conda/envs/freqnet/lib/python3.11/site-packages/audioread/rawread.py", line 59, in __init__
+    self._fh = open(filename, 'rb')
+               ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/hice1/etarr7/scratch/DL-Music-Separation-Project/data/DSD100/Sources/Dev/051 - AM Contra - Heart Peripheral/vocal.wav'
+Evaluating on device: cuda
+Found 141 checkpoints to evaluate
+Using 1 worker (sequential evaluation)
+
+=== Evaluating Epoch 0001 ===
+/storage/ice1/5/1/etarr7/DL-Music-Separation-Project/evaluation/evaluate_all_epochs.py:35: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state = torch.load(checkpoint_path, map_location=device)
