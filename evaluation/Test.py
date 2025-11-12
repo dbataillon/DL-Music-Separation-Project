@@ -18,10 +18,10 @@ def main():
     device = get_device()
     print(f"Using device: {device}")
 
-    model_dir = "./model"
+    model_dir = "./models/unet"
     checkpoint_files = [f for f in os.listdir(model_dir) if f.endswith(".pt")]
     if not checkpoint_files:
-        raise FileNotFoundError("No .pt checkpoint found in ./model")
+        raise FileNotFoundError(f"No .pt checkpoint found in {model_dir}")
     latest_ckpt = sorted(checkpoint_files)[-1]
     ckpt_path = os.path.join(model_dir, latest_ckpt)
     print(f"Loading checkpoint: {ckpt_path}")

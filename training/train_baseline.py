@@ -1,4 +1,4 @@
-# train_pytorch.py
+# train_baseline.py - Train baseline U-Net model for music source separation
 import os
 import time
 import gc
@@ -53,7 +53,19 @@ def get_latest_checkpoint(model_dir: str) -> tuple:
 def load_checkpoint_for_resume(model: torch.nn.Module, optimizer: torch.optim.Optimizer, checkpoint_path: str, device: torch.device) -> int:
     """Load checkpoint for resuming training. Returns the epoch number to resume from."""
     state = torch.load(checkpoint_path, map_location=device)
-    model.load_state_dict(state["model_state_dict"])
+    
+    # Handle DataParallel checkpoints - remove 'module.' prefix if present
+    model_state = state["model_state_dict"]
+    is_dataparallel = any(key.startswith("module.") for key in model_state.keys())
+    
+    if is_dataparallel and not isinstance(model, nn.DataParallel):
+        # Checkpoint was from DataParallel, but model isn't - remove prefix
+        model_state = {k.replace("module.", ""): v for k, v in model_state.items()}
+    elif not is_dataparallel and isinstance(model, nn.DataParallel):
+        # Checkpoint wasn't from DataParallel, but model is - add prefix
+        model_state = {f"module.{k}": v for k, v in model_state.items()}
+    
+    model.load_state_dict(model_state)
     optimizer.load_state_dict(state["optimizer_state_dict"])
     epoch = state.get("epoch", 0)
     print(f"Resumed from checkpoint: {checkpoint_path} (epoch {epoch})")
@@ -86,7 +98,7 @@ def numpy_to_torch_batch(X_np, Y_np):
     Y = torch.from_numpy(Y_np).float()
     return X, Y
 
-def save_checkpoint(model, optimizer, epoch, loss=None, model_dir="./model"):
+def save_checkpoint(model, optimizer, epoch, loss=None, model_dir="./models/unet"):
     os.makedirs(model_dir, exist_ok=True)
     path = os.path.join(model_dir, f"checkpoint_epoch_{epoch:04d}.pt")
     torch.save({
@@ -137,6 +149,12 @@ def main():
     # final_activation="relu" to match TF training on non-negative magnitudes.
     # (When you move to diffusion, set final_activation=None and change the loss/objective.)
     model = UNetStandard(num_outputs=4, dropout_p=0.4, final_activation="relu").to(device)
+    
+    # Enable multi-GPU if available
+    if torch.cuda.device_count() > 1:
+        print(f"Using {torch.cuda.device_count()} GPUs with DataParallel")
+        model = nn.DataParallel(model)
+    
     optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
 
     model_dir = "./models/unet"

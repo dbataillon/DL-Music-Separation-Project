@@ -5,6 +5,7 @@ from librosa import load
 
 import os
 import re 
+import tempfile
 import numpy as np
 from configs.config import *
 
@@ -25,11 +26,12 @@ def SaveAudio(file_path, mag, phase) :
     
 def SaveSpectrogram(y_mix, y_bass, y_drums, y_other, y_vocal, filename, orig_sr=44100, out_dir='./Spectrogram') :
     os.makedirs(out_dir, exist_ok=True)
-    y_mix = librosa.core.resample(y_mix,orig_sr,SR)
-    y_vocal = librosa.core.resample(y_vocal,orig_sr,SR)
-    y_bass = librosa.core.resample(y_bass,orig_sr,SR)
-    y_drums = librosa.core.resample(y_drums,orig_sr,SR)
-    y_other = librosa.core.resample(y_other,orig_sr,SR)
+    resample = librosa.core.resample
+    y_mix = resample(y_mix, orig_sr=orig_sr, target_sr=SR)
+    y_vocal = resample(y_vocal, orig_sr=orig_sr, target_sr=SR)
+    y_bass = resample(y_bass, orig_sr=orig_sr, target_sr=SR)
+    y_drums = resample(y_drums, orig_sr=orig_sr, target_sr=SR)
+    y_other = resample(y_other, orig_sr=orig_sr, target_sr=SR)
 
     S_mix = np.abs(librosa.stft(y_mix,n_fft=window_size,hop_length=hop_length)).astype(np.float32)
     S_bass = np.abs(librosa.stft(y_bass,n_fft=window_size,hop_length=hop_length)).astype(np.float32)
@@ -45,9 +47,9 @@ def SaveSpectrogram(y_mix, y_bass, y_drums, y_other, y_vocal, filename, orig_sr=
     S_vocal /= norm
     
     final_path = os.path.join(out_dir, filename + '.npz')
-    tmp_path = final_path + '.tmp'
-    np.savez(tmp_path, mix=S_mix, drums=S_drums, bass=S_bass, other=S_other, vocal=S_vocal)
-    os.replace(tmp_path, final_path)
+    os.makedirs(out_dir, exist_ok=True)
+    
+    np.savez(final_path, mix=S_mix, drums=S_drums, bass=S_bass, other=S_other, vocal=S_vocal)
     
 def LoadSpectrogram() :
     filelist = sorted(find_files('./Spectrogram', ext="npz"))
