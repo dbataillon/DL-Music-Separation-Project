@@ -48,12 +48,13 @@ class DiffusionUNet(nn.Module):
     """
     def __init__(self, base_channels=32, t_dim=256):
         super().__init__()
-        # Reuse your UNetStandard but change the first conv's in_channels
-        # Easiest way: create a UNet that *expects* 5 inputs by replacing enc1's first conv.
-        # Simpler: wrap UNetStandard and prepend a 1x1 "adapter" that maps 5->1 channels,
-        # but better is to make UNetStandard configurable. Here we do a quick adapter:
-        self.adapter = nn.Conv2d(5, 1, kernel_size=1, bias=True)
-        self.backbone = UNetStandard(num_outputs=4, dropout_p=0.0, final_activation=None)
+        # Reuse UNetStandard but configure it to accept 5 input channels directly
+        self.backbone = UNetStandard(
+            num_outputs=4,
+            dropout_p=0.0,
+            final_activation=None,
+            in_channels=5,
+        )
 
         # Timestep embedding (sinusoidal -> MLP)
         self.t_embed_dim = t_dim
@@ -90,7 +91,6 @@ class DiffusionUNet(nn.Module):
         self._t = self.time_mlp(t_emb)  # (B,t_dim)
 
         x_in = torch.cat([y_noisy_4ch, mix_mag_1ch], dim=1)  # (B,5,H,W)
-        x_in = self.adapter(x_in)  # (B,1,H,W) -> “drop-in” to your backbone
 
         # ---- Encoder 1 ----
         c1 = self.backbone.enc1(x_in)       # (B,32,H,W)

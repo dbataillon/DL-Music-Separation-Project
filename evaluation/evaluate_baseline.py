@@ -218,43 +218,44 @@ def main() -> None:
     model = UNetStandard(num_outputs=len(STEM_ORDER), dropout_p=0.4, final_activation="relu").to(device)
     load_checkpoint(model, args.checkpoint, device)
 
-    tracks = build_track_list(args.dataset_root, args.subset)
-    per_track_metrics: List[Dict[str, Dict[str, float]]] = []
-    timings: List[float] = []
+    print('nb parameters:', sum(p.numel() for p in model.parameters() if p.requires_grad))
+    # tracks = build_track_list(args.dataset_root, args.subset)
+    # per_track_metrics: List[Dict[str, Dict[str, float]]] = []
+    # timings: List[float] = []
 
-    for idx, (mix_path, stem_dir) in enumerate(tracks, start=1):
-        track_name = os.path.basename(os.path.dirname(mix_path))
-        t0 = time.time()
-        metrics = evaluate_track(model, device, mix_path, stem_dir)
-        dt = time.time() - t0
-        per_track_metrics.append(metrics)
-        timings.append(dt)
-        print(f"[{idx:03d}/{len(tracks):03d}] {track_name}: "
-              + ", ".join(f"{stem} SDR={metrics[stem]['SDR']:.2f} dB" for stem in STEM_ORDER)
-              + f" | {dt:.1f}s")
+    # for idx, (mix_path, stem_dir) in enumerate(tracks, start=1):
+    #     track_name = os.path.basename(os.path.dirname(mix_path))
+    #     t0 = time.time()
+    #     metrics = evaluate_track(model, device, mix_path, stem_dir)
+    #     dt = time.time() - t0
+    #     per_track_metrics.append(metrics)
+    #     timings.append(dt)
+    #     print(f"[{idx:03d}/{len(tracks):03d}] {track_name}: "
+    #           + ", ".join(f"{stem} SDR={metrics[stem]['SDR']:.2f} dB" for stem in STEM_ORDER)
+    #           + f" | {dt:.1f}s")
 
-    summary = aggregate_metrics(per_track_metrics)
-    avg_time = float(np.mean(timings))
-    print("\n=== Aggregated Metrics ===")
-    for stem in STEM_ORDER:
-        stem_metrics = summary[stem]
-        print(
-            f"{stem}: SDR {stem_metrics['SDR']['mean']:.2f}±{stem_metrics['SDR']['ci95']:.2f} dB "
-            f"| SI-SDR {stem_metrics['SI_SDR']['mean']:.2f}±{stem_metrics['SI_SDR']['ci95']:.2f} dB"
-        )
-    print(f"Average inference time per track: {avg_time:.1f}s")
+    # summary = aggregate_metrics(per_track_metrics)
+    # avg_time = float(np.mean(timings))
+    # print("\n=== Aggregated Metrics ===")
+    # for stem in STEM_ORDER:
+    #     stem_metrics = summary[stem]
+    #     print(
+    #         f"{stem}: SDR {stem_metrics['SDR']['mean']:.2f}±{stem_metrics['SDR']['ci95']:.2f} dB "
+    #         f"| SI-SDR {stem_metrics['SI_SDR']['mean']:.2f}±{stem_metrics['SI_SDR']['ci95']:.2f} dB"
+    #     )
+    # print(f"Average inference time per track: {avg_time:.1f}s")
 
-    if args.output_json:
-        payload = {
-            "dataset_root": args.dataset_root,
-            "subset": args.subset,
-            "checkpoint": args.checkpoint,
-            "metrics": summary,
-            "average_inference_seconds": avg_time,
-        }
-        with open(args.output_json, "w", encoding="utf-8") as f:
-            json.dump(payload, f, indent=2)
-        print(f"Wrote summary to {args.output_json}")
+    # if args.output_json:
+    #     payload = {
+    #         "dataset_root": args.dataset_root,
+    #         "subset": args.subset,
+    #         "checkpoint": args.checkpoint,
+    #         "metrics": summary,l
+    #         "average_inference_seconds": avg_time,
+    #     }
+    #     with open(args.output_json, "w", encoding="utf-8") as f:
+    #         json.dump(payload, f, indent=2)
+    #     print(f"Wrote summary to {args.output_json}")
 
 
 if __name__ == "__main__":

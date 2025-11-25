@@ -7,12 +7,12 @@ image_width = 512
 # hop_length = 512
 # image_width = 1024
 
-LEARNING_RATE = 1e-4
+LEARNING_RATE = 1e-6
 
 patch_size = 128 # roughly 33 seconds
 
 ## for training
-# EPOCH = 40
+# EPOCH = 5
 EPOCH = 300
 BATCH = 8
 SAMPLING_STRIDE = 10

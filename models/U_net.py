@@ -34,16 +34,23 @@ class DeconvBNRelu(nn.Module):
 class UNetStandard(nn.Module):
     """
     Standard-order PyTorch port of U_net.py (Conv→BN→ReLU).
-    Input:  (B, 1, H, 128)   # magnitude spectrograms
+    Input:  (B, in_channels, H, 128)   # magnitude spectrograms
     Output: (B, num_outputs, H, 128)
     """
-    def __init__(self, num_outputs=4, dropout_p=0.4, final_activation=None):
+    def __init__(
+        self,
+        num_outputs=4,
+        dropout_p=0.4,
+        final_activation=None,
+        in_channels=1,
+    ):
         super().__init__()
         self.final_activation = final_activation  # e.g. 'relu' for TF parity, None for diffusion
 
         # Encoder
         self.enc1 = nn.Sequential(
-            ConvBNRelu(1, 32), ConvBNRelu(32, 32)
+            ConvBNRelu(in_channels, 32),
+            ConvBNRelu(32, 32),
         )
         self.enc2 = nn.Sequential(
             ConvBNRelu(32, 64), ConvBNRelu(64, 64)
