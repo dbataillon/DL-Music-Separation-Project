@@ -16,3 +16,9 @@ patch_size = 128 # roughly 33 seconds
 EPOCH = 300
 BATCH = 8
 SAMPLING_STRIDE = 10
+
+SOURCE_NAMES = ["bass", "drums", "other", "vocals"]
+#Uniform weighting
+LOSS_WEIGHTS = [1.0, 1.0, 1.0, 1.0]
+#Balanced weights
+#LOSS_WEIGHTS = [1.5, 1.2, 1.0, 1.0]

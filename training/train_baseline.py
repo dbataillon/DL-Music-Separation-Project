@@ -16,7 +16,7 @@ from preprocessing.util import (
     Magnitude_phase_y,
     sampling,
 )
-from configs.config import EPOCH, BATCH, LEARNING_RATE, image_width
+from configs.config import EPOCH, BATCH, LEARNING_RATE, image_width, SOURCE_NAMES, LOSS_WEIGHTS
 
 # Your PyTorch U-Net (standard Conv->BN->ReLU order)
 from models.U_net import UNetStandard
@@ -109,9 +109,9 @@ def save_checkpoint(model, optimizer, epoch, loss=None, model_dir="./models/unet
     }, path)
     return path
 
-def train_one_epoch(model, loader, optimizer, device):
+def train_one_epoch(model, loader, optimizer, device, channel_weights: torch.Tensor):
     model.train()
-    criterion = nn.L1Loss()  # same as tf.losses.absolute_difference
+    criterion = nn.L1Loss(reduction="none")  # same as tf.losses.absolute_difference
     epoch_loss = 0.0
     n_samples = 0
 
@@ -121,7 +121,8 @@ def train_one_epoch(model, loader, optimizer, device):
 
         optimizer.zero_grad()
         Y_hat = model(X_batch, training=True)  # keep dropout on during training
-        loss = criterion(Y_hat, Y_batch)
+        loss_raw = criterion(Y_hat, Y_batch)
+        loss = (loss_raw * channel_weights).mean()
         loss.backward()
         optimizer.step()
 
@@ -162,6 +163,19 @@ def main():
     
     # File to track training loss over epochs
     loss_log_path = os.path.join(model_dir, "training_loss.json")
+
+    num_channels = len(SOURCE_NAMES)
+    if not isinstance(LOSS_WEIGHTS, (list, tuple)) or len(LOSS_WEIGHTS) != num_channels:
+        print(f"WARNING: LOSS_WEIGHTS invalid for {num_channels} channels. Using uniform=1.0.")
+        weights_list = [1.0] * num_channels
+    else:
+        weights_list = LOSS_WEIGHTS
+    print(f"Using per-channel loss weights: {dict(zip(SOURCE_NAMES, weights_list))}")
+
+    channel_weights = (
+        torch.tensor(weights_list, device=device)
+        .view(1, num_channels, 1, 1)
+    )
     
     # Try to resume from latest checkpoint
     start_epoch = 1
@@ -201,7 +215,7 @@ def main():
         # Disable pin_memory to reduce RAM usage
         loader = DataLoader(dataset, batch_size=BATCH, shuffle=False, pin_memory=False)
 
-        avg_loss = train_one_epoch(model, loader, optimizer, device)
+        avg_loss = train_one_epoch(model, loader, optimizer, device, channel_weights)
         
         # Clear tensors from this epoch
         del dataset, loader, X_t, Y_t
