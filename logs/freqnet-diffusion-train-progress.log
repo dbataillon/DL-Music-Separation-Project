@@ -1,0 +1,1104 @@
+Using device: cuda
+No checkpoint found. Starting fresh training from epoch 1
+Loading spectrograms...
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/storage/ice1/5/1/etarr7/DL-Music-Separation-Project/training/Training_diffusion.py", line 265, in <module>
+    train_diffusion()
+  File "/storage/ice1/5/1/etarr7/DL-Music-Separation-Project/training/Training_diffusion.py", line 211, in train_diffusion
+    print(f"X_mag shape: {X_mag.shape}, Y_mag shape: {Y_mag.shape}")
+                          ^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'shape'
+Using device: cuda
+No checkpoint found. Starting fresh training from epoch 1
+Loading spectrograms...
+Loaded 50 mixtures with mix shape (513, 4378) and stems (4, (513, 4378))
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/storage/ice1/5/1/etarr7/DL-Music-Separation-Project/training/Training_diffusion.py", line 277, in <module>
+    train_diffusion()
+  File "/storage/ice1/5/1/etarr7/DL-Music-Separation-Project/training/Training_diffusion.py", line 236, in train_diffusion
+    Y_t = torch.from_numpy(np.transpose(Y_np, (0, 3, 1, 2))).float().to(device)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 25.86 GiB. GPU 0 has a total capacity of 15.77 GiB of which 8.88 GiB is free. Including non-PyTorch memory, this process has 6.88 GiB memory in use. Of the allocated memory 6.51 GiB is allocated by PyTorch, and 13.62 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Using device: cuda
+No checkpoint found. Starting fresh training from epoch 1
+Loading spectrograms...
+Loaded 50 mixtures with mix shape (513, 4378) and stems (4, (513, 4378))
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/storage/ice1/5/1/etarr7/DL-Music-Separation-Project/training/Training_diffusion.py", line 283, in <module>
+    train_diffusion()
+  File "/storage/ice1/5/1/etarr7/DL-Music-Separation-Project/training/Training_diffusion.py", line 253, in train_diffusion
+    avg_loss = train_one_epoch(net, dl, opt, device, betas, alphas_bar, T)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/ice1/5/1/etarr7/DL-Music-Separation-Project/training/Training_diffusion.py", line 137, in train_one_epoch
+    eps_hat = model(y_noisy, mix_mag, t_int)  # (B,4,H,W)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hice1/etarr7/.conda/envs/freqnet/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hice1/etarr7/.conda/envs/freqnet/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/ice1/5/1/etarr7/DL-Music-Separation-Project/models/diffusion_model.py", line 92, in forward
+    x_in = torch.cat([y_noisy_4ch, mix_mag_1ch], dim=1)  # (B,5,H,W)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Tensors must have same number of dimensions: got 4 and 5
+Using device: cuda
+No checkpoint found. Starting fresh training from epoch 1
+Loading spectrograms...
+Loaded 50 mixtures with mix shape (513, 4378) and stems (4, (513, 4378))
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 001/300] loss=0.933185 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0001.pt | 288.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 002/300] loss=0.770769 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0002.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 003/300] loss=0.752074 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0003.pt | 264.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 004/300] loss=0.751590 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0004.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 005/300] loss=0.751293 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0005.pt | 264.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 006/300] loss=0.751142 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0006.pt | 264.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 007/300] loss=0.751035 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0007.pt | 264.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 008/300] loss=0.750854 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0008.pt | 264.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 009/300] loss=0.750804 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0009.pt | 265.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 010/300] loss=0.750730 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0010.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 011/300] loss=0.750684 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0011.pt | 264.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 012/300] loss=0.750655 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0012.pt | 264.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 013/300] loss=0.750593 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0013.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 014/300] loss=0.750557 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0014.pt | 266.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 015/300] loss=0.750494 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0015.pt | 268.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 016/300] loss=0.750483 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0016.pt | 272.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 017/300] loss=0.750490 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0017.pt | 265.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 018/300] loss=0.750483 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0018.pt | 264.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 019/300] loss=0.750455 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0019.pt | 264.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 020/300] loss=0.750418 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0020.pt | 264.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 021/300] loss=0.750456 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0021.pt | 264.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 022/300] loss=0.750397 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0022.pt | 264.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 023/300] loss=0.750350 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0023.pt | 264.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 024/300] loss=0.750339 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0024.pt | 264.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 025/300] loss=0.750367 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0025.pt | 265.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 026/300] loss=0.750305 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0026.pt | 264.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 027/300] loss=0.750338 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0027.pt | 264.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 028/300] loss=0.750320 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0028.pt | 266.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 029/300] loss=0.750337 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0029.pt | 266.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 030/300] loss=0.750314 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0030.pt | 274.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 031/300] loss=0.750334 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0031.pt | 266.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 032/300] loss=0.750281 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0032.pt | 264.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 033/300] loss=0.750291 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0033.pt | 264.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 034/300] loss=0.750288 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0034.pt | 264.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 035/300] loss=0.750291 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0035.pt | 264.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 036/300] loss=0.750285 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0036.pt | 264.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 037/300] loss=0.750276 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0037.pt | 264.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 038/300] loss=0.750301 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0038.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 039/300] loss=0.750259 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0039.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 040/300] loss=0.750270 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0040.pt | 264.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 041/300] loss=0.750288 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0041.pt | 264.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 042/300] loss=0.750275 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0042.pt | 265.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 043/300] loss=0.750266 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0043.pt | 265.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 044/300] loss=0.750262 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0044.pt | 266.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 045/300] loss=0.750266 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0045.pt | 275.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 046/300] loss=0.750252 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0046.pt | 265.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 047/300] loss=0.750252 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0047.pt | 264.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 048/300] loss=0.750279 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0048.pt | 265.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 049/300] loss=0.750222 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0049.pt | 264.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 050/300] loss=0.750252 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0050.pt | 264.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 051/300] loss=0.750259 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0051.pt | 264.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 052/300] loss=0.750219 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0052.pt | 264.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 053/300] loss=0.750232 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0053.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 054/300] loss=0.750202 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0054.pt | 264.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 055/300] loss=0.750246 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0055.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 056/300] loss=0.750241 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0056.pt | 273.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 057/300] loss=0.750243 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0057.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 058/300] loss=0.750264 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0058.pt | 273.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 059/300] loss=0.750233 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0059.pt | 267.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 060/300] loss=0.750226 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0060.pt | 265.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 061/300] loss=0.750243 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0061.pt | 265.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 062/300] loss=0.750226 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0062.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 063/300] loss=0.750220 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0063.pt | 265.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 064/300] loss=0.750245 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0064.pt | 264.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 065/300] loss=0.750209 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0065.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 066/300] loss=0.750189 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0066.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 067/300] loss=0.750232 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0067.pt | 264.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 068/300] loss=0.750205 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0068.pt | 264.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 069/300] loss=0.750206 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0069.pt | 265.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 070/300] loss=0.750185 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0070.pt | 267.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 071/300] loss=0.750218 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0071.pt | 269.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 072/300] loss=0.750210 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0072.pt | 266.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 073/300] loss=0.750204 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0073.pt | 267.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 074/300] loss=0.750185 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0074.pt | 265.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 075/300] loss=0.750225 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0075.pt | 266.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 076/300] loss=0.750199 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0076.pt | 265.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 077/300] loss=0.750171 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0077.pt | 264.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 078/300] loss=0.750216 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0078.pt | 265.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 079/300] loss=0.750218 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0079.pt | 264.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 080/300] loss=0.750201 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0080.pt | 264.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 081/300] loss=0.750210 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0081.pt | 264.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 082/300] loss=0.750219 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0082.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 083/300] loss=0.750179 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0083.pt | 264.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 084/300] loss=0.750207 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0084.pt | 264.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 085/300] loss=0.750209 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0085.pt | 265.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 086/300] loss=0.750207 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0086.pt | 268.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 087/300] loss=0.750166 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0087.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 088/300] loss=0.750167 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0088.pt | 271.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 089/300] loss=0.750188 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0089.pt | 265.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 090/300] loss=0.750167 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0090.pt | 265.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 091/300] loss=0.750161 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0091.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 092/300] loss=0.750192 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0092.pt | 265.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 093/300] loss=0.750195 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0093.pt | 265.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 094/300] loss=0.750187 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0094.pt | 264.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 095/300] loss=0.750173 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0095.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 096/300] loss=0.750186 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0096.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 097/300] loss=0.750190 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0097.pt | 264.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 098/300] loss=0.750197 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0098.pt | 264.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 099/300] loss=0.750175 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0099.pt | 270.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 100/300] loss=0.750191 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0100.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 101/300] loss=0.750190 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0101.pt | 264.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 102/300] loss=0.750166 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0102.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 103/300] loss=0.750202 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0103.pt | 269.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 104/300] loss=0.750173 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0104.pt | 265.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 105/300] loss=0.750200 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0105.pt | 265.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 106/300] loss=0.750198 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0106.pt | 265.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 107/300] loss=0.750185 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0107.pt | 265.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 108/300] loss=0.750186 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0108.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 109/300] loss=0.750165 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0109.pt | 264.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 110/300] loss=0.750176 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0110.pt | 264.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 111/300] loss=0.750192 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0111.pt | 264.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 112/300] loss=0.750144 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0112.pt | 265.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 113/300] loss=0.750182 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0113.pt | 265.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 114/300] loss=0.750171 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0114.pt | 270.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 115/300] loss=0.750177 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0115.pt | 264.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 116/300] loss=0.750173 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0116.pt | 270.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 117/300] loss=0.750137 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0117.pt | 265.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 118/300] loss=0.750191 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0118.pt | 266.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 119/300] loss=0.750154 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0119.pt | 266.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 120/300] loss=0.750166 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0120.pt | 267.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 121/300] loss=0.750195 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0121.pt | 265.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 122/300] loss=0.750174 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0122.pt | 265.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 123/300] loss=0.750164 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0123.pt | 266.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 124/300] loss=0.750151 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0124.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 125/300] loss=0.750158 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0125.pt | 265.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 126/300] loss=0.750144 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0126.pt | 266.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 127/300] loss=0.750157 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0127.pt | 266.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 128/300] loss=0.750170 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0128.pt | 267.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 129/300] loss=0.750161 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0129.pt | 270.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 130/300] loss=0.750172 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0130.pt | 266.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 131/300] loss=0.750174 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0131.pt | 265.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 132/300] loss=0.750179 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0132.pt | 265.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 133/300] loss=0.750142 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0133.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 134/300] loss=0.750194 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0134.pt | 264.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 135/300] loss=0.750163 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0135.pt | 265.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 136/300] loss=0.750160 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0136.pt | 264.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 137/300] loss=0.750175 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0137.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 138/300] loss=0.750154 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0138.pt | 266.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 139/300] loss=0.750173 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0139.pt | 269.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 140/300] loss=0.750159 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0140.pt | 267.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 141/300] loss=0.750126 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0141.pt | 264.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 142/300] loss=0.750197 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0142.pt | 264.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 143/300] loss=0.750175 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0143.pt | 265.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 144/300] loss=0.750153 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0144.pt | 266.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 145/300] loss=0.750185 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0145.pt | 266.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 146/300] loss=0.750135 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0146.pt | 265.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 147/300] loss=0.750140 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0147.pt | 265.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 148/300] loss=0.750168 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0148.pt | 265.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 149/300] loss=0.750150 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0149.pt | 264.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 150/300] loss=0.750153 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0150.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 151/300] loss=0.750158 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0151.pt | 264.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 152/300] loss=0.750166 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0152.pt | 265.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 153/300] loss=0.750159 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0153.pt | 266.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 154/300] loss=0.750161 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0154.pt | 268.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 155/300] loss=0.750199 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0155.pt | 267.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 156/300] loss=0.750140 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0156.pt | 265.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 157/300] loss=0.750163 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0157.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 158/300] loss=0.750152 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0158.pt | 265.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 159/300] loss=0.750209 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0159.pt | 266.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 160/300] loss=0.750151 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0160.pt | 266.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 161/300] loss=0.750170 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0161.pt | 265.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 162/300] loss=0.750192 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0162.pt | 265.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+Using device: cuda
+No checkpoint found. Starting fresh training from epoch 1
+Loading spectrograms...
+Loaded 50 mixtures with mix shape (513, 4378) and stems (4, (513, 4378))
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 001/300] loss=0.921962 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0001.pt | 293.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+Using device: cuda
+number of parameters: 11813490
+/storage/ice1/5/1/etarr7/DL-Music-Separation-Project/training/Training_diffusion.py:74: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state = torch.load(checkpoint_path, map_location=device)
+Resumed from checkpoint: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0001.pt (epoch 1)
+Resuming training from epoch 2
+Loading spectrograms...
+Loaded 50 mixtures with mix shape (513, 4378) and stems (4, (513, 4378))
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 002/300] loss=0.770675 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0002.pt | 297.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 003/300] loss=0.752074 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0003.pt | 272.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 004/300] loss=0.751665 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0004.pt | 271.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 005/300] loss=0.751341 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0005.pt | 272.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 006/300] loss=0.751196 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0006.pt | 271.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+Using device: cuda
+number of parameters: 11813490
+/storage/ice1/5/1/etarr7/DL-Music-Separation-Project/training/Training_diffusion.py:74: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state = torch.load(checkpoint_path, map_location=device)
+Resumed from checkpoint: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0006.pt (epoch 6)
+Resuming training from epoch 7
+Loading spectrograms...
+Loaded 50 mixtures with mix shape (513, 4378) and stems (4, (513, 4378))
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 007/300] loss=0.750753 | lr=1.00e-04 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0007.pt | 297.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 008/300] loss=0.750637 | lr=1.00e-04 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0008.pt | 275.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 009/300] loss=0.750596 | lr=1.00e-04 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0009.pt | 274.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 010/300] loss=0.750497 | lr=1.00e-04 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0010.pt | 274.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 011/300] loss=0.750457 | lr=9.99e-05 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0011.pt | 274.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 012/300] loss=0.750418 | lr=9.99e-05 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0012.pt | 274.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 013/300] loss=0.750363 | lr=9.99e-05 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0013.pt | 274.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 014/300] loss=0.750323 | lr=9.98e-05 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0014.pt | 274.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+Using device: cuda
+number of parameters: 11814636
+No checkpoint found. Starting fresh training from epoch 1
+Loading spectrograms...
+Loaded 50 mixtures with mix shape (513, 4378) and stems (4, (513, 4378))
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 001/300] loss=1.412765 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0001.pt | 267.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 002/300] loss=0.762501 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0002.pt | 266.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 003/300] loss=0.495370 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0003.pt | 266.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 004/300] loss=0.356267 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0004.pt | 284.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 005/300] loss=0.274246 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0005.pt | 266.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 006/300] loss=0.219418 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0006.pt | 267.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 007/300] loss=0.181423 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0007.pt | 266.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 008/300] loss=0.153524 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0008.pt | 266.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 009/300] loss=0.133140 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0009.pt | 266.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 010/300] loss=0.117573 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0010.pt | 266.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 011/300] loss=0.105345 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0011.pt | 266.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 012/300] loss=0.095038 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0012.pt | 267.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 013/300] loss=0.086191 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0013.pt | 267.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 014/300] loss=0.079009 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0014.pt | 266.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 015/300] loss=0.073064 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0015.pt | 279.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 016/300] loss=0.067691 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0016.pt | 274.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 017/300] loss=0.063363 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0017.pt | 289.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 018/300] loss=0.059168 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0018.pt | 270.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 019/300] loss=0.055526 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0019.pt | 266.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 020/300] loss=0.052882 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0020.pt | 266.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 021/300] loss=0.050085 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0021.pt | 266.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 022/300] loss=0.048043 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0022.pt | 266.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 023/300] loss=0.045978 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0023.pt | 266.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 024/300] loss=0.043843 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0024.pt | 267.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 025/300] loss=0.042088 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0025.pt | 266.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 026/300] loss=0.040462 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0026.pt | 266.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 027/300] loss=0.038839 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0027.pt | 266.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 028/300] loss=0.038442 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0028.pt | 266.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 029/300] loss=0.036625 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0029.pt | 268.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 030/300] loss=0.035427 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0030.pt | 272.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 031/300] loss=0.034614 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0031.pt | 267.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 032/300] loss=0.034198 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0032.pt | 266.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 033/300] loss=0.033085 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0033.pt | 271.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 034/300] loss=0.032379 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0034.pt | 267.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 035/300] loss=0.031602 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0035.pt | 267.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 036/300] loss=0.031023 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0036.pt | 267.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 037/300] loss=0.030653 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0037.pt | 266.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 038/300] loss=0.029960 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0038.pt | 267.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 039/300] loss=0.029122 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0039.pt | 266.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 040/300] loss=0.028734 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0040.pt | 267.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 041/300] loss=0.028340 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0041.pt | 266.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 042/300] loss=0.027544 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0042.pt | 266.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 043/300] loss=0.027451 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0043.pt | 266.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 044/300] loss=0.027038 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0044.pt | 270.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 045/300] loss=0.026605 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0045.pt | 270.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 046/300] loss=0.026471 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0046.pt | 267.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 047/300] loss=0.025530 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0047.pt | 266.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 048/300] loss=0.025588 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0048.pt | 269.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 049/300] loss=0.025181 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0049.pt | 266.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 050/300] loss=0.024636 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0050.pt | 266.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 051/300] loss=0.024485 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0051.pt | 265.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 052/300] loss=0.023715 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0052.pt | 265.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 053/300] loss=0.023809 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0053.pt | 264.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 054/300] loss=0.023172 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0054.pt | 264.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 055/300] loss=0.023135 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0055.pt | 264.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 056/300] loss=0.023399 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0056.pt | 264.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 057/300] loss=0.023007 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0057.pt | 264.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 058/300] loss=0.022597 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0058.pt | 264.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 059/300] loss=0.022154 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0059.pt | 267.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 060/300] loss=0.021871 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0060.pt | 268.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 061/300] loss=0.022048 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0061.pt | 264.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 062/300] loss=0.021954 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0062.pt | 265.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 063/300] loss=0.021151 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0063.pt | 268.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 064/300] loss=0.021425 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0064.pt | 264.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 065/300] loss=0.021067 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0065.pt | 264.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 066/300] loss=0.020948 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0066.pt | 276.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 067/300] loss=0.020443 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0067.pt | 264.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 068/300] loss=0.020589 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0068.pt | 264.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 069/300] loss=0.020415 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0069.pt | 264.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 070/300] loss=0.020055 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0070.pt | 264.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 071/300] loss=0.019681 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0071.pt | 264.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 072/300] loss=0.019437 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0072.pt | 264.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 073/300] loss=0.019749 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0073.pt | 265.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 074/300] loss=0.019596 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0074.pt | 268.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 075/300] loss=0.019253 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0075.pt | 265.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 076/300] loss=0.018939 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0076.pt | 266.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 077/300] loss=0.018949 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0077.pt | 265.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 078/300] loss=0.019032 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0078.pt | 265.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 079/300] loss=0.018685 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0079.pt | 265.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 080/300] loss=0.018513 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0080.pt | 265.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 081/300] loss=0.018587 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0081.pt | 275.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 082/300] loss=0.018486 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0082.pt | 265.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 083/300] loss=0.018434 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0083.pt | 267.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 084/300] loss=0.018407 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0084.pt | 265.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 085/300] loss=0.018079 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0085.pt | 265.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 086/300] loss=0.017576 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0086.pt | 265.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 087/300] loss=0.017943 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0087.pt | 265.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 088/300] loss=0.017359 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0088.pt | 267.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 089/300] loss=0.018082 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0089.pt | 267.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 090/300] loss=0.017941 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0090.pt | 266.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 091/300] loss=0.017275 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0091.pt | 268.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 092/300] loss=0.017390 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0092.pt | 266.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 093/300] loss=0.017025 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0093.pt | 265.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 094/300] loss=0.017096 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0094.pt | 265.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 095/300] loss=0.016967 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0095.pt | 266.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 096/300] loss=0.016991 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0096.pt | 273.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 097/300] loss=0.016855 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0097.pt | 266.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 098/300] loss=0.017081 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0098.pt | 266.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 099/300] loss=0.016954 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0099.pt | 266.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 100/300] loss=0.016314 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0100.pt | 267.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 101/300] loss=0.016652 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0101.pt | 265.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 102/300] loss=0.016838 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0102.pt | 265.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 103/300] loss=0.016410 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0103.pt | 267.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 104/300] loss=0.016303 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0104.pt | 266.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 105/300] loss=0.016422 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0105.pt | 265.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 106/300] loss=0.015866 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0106.pt | 266.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 107/300] loss=0.015936 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0107.pt | 266.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 108/300] loss=0.015978 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0108.pt | 266.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 109/300] loss=0.016138 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0109.pt | 265.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 110/300] loss=0.015743 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0110.pt | 266.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 111/300] loss=0.015526 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0111.pt | 274.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 112/300] loss=0.015636 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0112.pt | 266.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 113/300] loss=0.015628 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0113.pt | 266.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 114/300] loss=0.015322 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0114.pt | 265.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 115/300] loss=0.015150 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0115.pt | 267.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 116/300] loss=0.015450 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0116.pt | 267.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 117/300] loss=0.015340 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0117.pt | 265.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 118/300] loss=0.015402 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0118.pt | 265.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 119/300] loss=0.015012 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0119.pt | 272.3s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 120/300] loss=0.015261 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0120.pt | 268.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 121/300] loss=0.015220 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0121.pt | 265.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 122/300] loss=0.015028 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0122.pt | 266.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 123/300] loss=0.015046 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0123.pt | 265.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 124/300] loss=0.014603 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0124.pt | 265.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 125/300] loss=0.014443 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0125.pt | 272.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 126/300] loss=0.014726 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0126.pt | 268.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 127/300] loss=0.014835 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0127.pt | 265.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 128/300] loss=0.014366 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0128.pt | 266.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 129/300] loss=0.014534 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0129.pt | 268.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 130/300] loss=0.014542 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0130.pt | 266.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 131/300] loss=0.014433 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0131.pt | 265.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 132/300] loss=0.014546 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0132.pt | 265.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 133/300] loss=0.014205 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0133.pt | 265.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 134/300] loss=0.014308 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0134.pt | 265.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 135/300] loss=0.013962 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0135.pt | 265.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 136/300] loss=0.014140 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0136.pt | 266.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 137/300] loss=0.014082 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0137.pt | 266.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 138/300] loss=0.014235 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0138.pt | 265.7s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 139/300] loss=0.013885 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0139.pt | 265.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 140/300] loss=0.014010 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0140.pt | 272.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 141/300] loss=0.013835 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0141.pt | 266.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 142/300] loss=0.013698 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0142.pt | 265.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 143/300] loss=0.013641 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0143.pt | 265.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 144/300] loss=0.013767 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0144.pt | 267.4s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 145/300] loss=0.013624 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0145.pt | 265.9s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 146/300] loss=0.013487 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0146.pt | 265.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 147/300] loss=0.013425 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0147.pt | 265.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 148/300] loss=0.013352 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0148.pt | 265.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 149/300] loss=0.013511 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0149.pt | 265.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 150/300] loss=0.013312 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0150.pt | 265.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 151/300] loss=0.013580 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0151.pt | 266.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 152/300] loss=0.013265 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0152.pt | 265.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 153/300] loss=0.013163 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0153.pt | 265.5s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 154/300] loss=0.013101 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0154.pt | 266.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 155/300] loss=0.012972 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0155.pt | 274.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 156/300] loss=0.013065 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0156.pt | 266.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 157/300] loss=0.013404 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0157.pt | 267.0s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 158/300] loss=0.013036 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0158.pt | 265.8s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 159/300] loss=0.012911 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0159.pt | 266.1s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 160/300] loss=0.012900 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0160.pt | 264.6s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)
+[Epoch 161/300] loss=0.012634 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0161.pt | 264.2s
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)

@@ -2,9 +2,15 @@
 import argparse
 import json
 import os
+import sys
 import time
 from pathlib import Path
 from typing import Dict, List, Tuple
+
+# Add project root to path for imports
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 import librosa
 import numpy as np
@@ -13,6 +19,7 @@ import torch
 from configs.config import SR, window_size, hop_length, patch_size
 from evaluation.sample_diffusion import (
     STEM_NAMES,
+    STEM_FILE_NAMES,
     load_model,
     make_cosine_schedule,
     prepare_mix_batches,
@@ -111,7 +118,9 @@ def evaluate_track(model, betas, mix_path: str, stem_dir: str) -> Dict[str, Dict
     estimates = []
 
     for idx, stem in enumerate(STEM_NAMES):
-        stem_path = os.path.join(stem_dir, f"{stem}.wav")
+        # Use STEM_FILE_NAMES for actual file names (vocals vs vocal)
+        stem_file = STEM_FILE_NAMES[idx]
+        stem_path = os.path.join(stem_dir, f"{stem_file}.wav")
         target_audio, _ = librosa.load(stem_path, sr=SR)
         target_audio = target_audio.astype(np.float32)
 

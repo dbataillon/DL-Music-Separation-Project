@@ -44,8 +44,10 @@ stempeg==0.2.6
 sympy==1.13.1
 threadpoolctl==3.6.0
 torch==2.5.1
+torchaudio==2.5.1
 tqdm==4.67.1
 typing_extensions==4.15.0
 tzdata==2025.2
 urllib3==2.5.0
+demucs>=4.0.0
 wget==3.2

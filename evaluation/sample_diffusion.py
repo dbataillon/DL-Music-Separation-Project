@@ -15,7 +15,11 @@ from configs.config import patch_size
 from models.diffusion_model import DiffusionUNet
 from preprocessing.util import LoadAudio, SaveAudio
 
+# Stem order matches training: vocal, bass, drums, other
+# But DSD100 files use "vocals" (with 's'), so we map for file loading
 STEM_NAMES = ["vocal", "bass", "drums", "other"]
+# Map for DSD100 file names
+STEM_FILE_NAMES = ["vocals", "bass", "drums", "other"]
 
 
 def make_cosine_schedule(T=200, s=0.008):
@@ -103,6 +107,8 @@ def ddim_step(model, x, mix, t, betas, alphas, alphas_bar):
         x = mean + sigma * noise
     else:
         x = mean
+    # Clamp to valid spectrogram range [0, 1] at each step
+    x = x.clamp(0.0, 1.0)
     return x
 
 
