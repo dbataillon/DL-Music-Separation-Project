@@ -1,0 +1,79 @@
+\section{Experiments and Results}
+
+\subsection{Evaluation Protocol}
+
+We evaluate all models using Signal-to-Distortion Ratio (SDR) in decibels, the standard metric for source separation that measures the ratio of target signal energy to artifacts and interference. Higher SDR indicates better separation quality, with negative values indicating that the separated output is more distorted than the original mixture. We compute SDR for each of the four stems independently and report the mean across tracks with 95\% confidence intervals. All models are trained for 300 epochs on the Dev subset, with checkpoints saved every 10 epochs. Final evaluation uses the checkpoint with the lowest validation loss.
+
+\subsection{Baselines}
+
+We compare our diffusion-based approach against several baselines spanning deterministic spectrogram methods, waveform-domain models, and pretrained state-of-the-art systems.
+
+The \textbf{Spectrogram U-Net} serves as our primary deterministic baseline. This encoder-decoder architecture operates on magnitude spectrograms with skip connections between corresponding encoder and decoder layers, trained with mean squared error loss to directly predict source spectrograms from the mixture. We observed that standard Xavier initialization led to training instability, motivating an ablation with \textbf{balanced weight initialization} that scales initial weights to prevent gradient explosion in the early training stages.
+
+For waveform-domain comparison, we implement a simplified \textbf{Demucs} architecture with 16.5 million parameters. Unlike spectrogram methods, Demucs operates directly on raw audio waveforms, avoiding the phase reconstruction problem inherent to magnitude spectrogram approaches. The model is trained from scratch on our 50-track subset using a combination of L1 and multi-resolution STFT losses.
+
+As an upper-bound reference, we include the \textbf{pretrained htdemucs} model, a state-of-the-art hybrid transformer architecture trained on a large proprietary dataset containing thousands of professionally mixed tracks. This comparison illustrates the performance gap attributable to limited training data.
+
+\subsection{Proposed Method and Ablations}
+
+Our primary contribution is a \textbf{Diffusion U-Net} for music source separation. The model is a denoising diffusion probabilistic model (DDPM) conditioned on the mixture spectrogram. The architecture employs a U-Net backbone with Feature-wise Linear Modulation (FiLM) layers for timestep conditioning. We use a cosine noise schedule with $T=200$ diffusion steps.
+
+We conduct several ablations to investigate the challenges of applying diffusion models to spectrogram data:
+
+\paragraph{Mixture Conditioning (5-channel input).} Our initial experiments without mixture conditioning produced random noise outputs. Adding the mixture spectrogram as an additional input channel proved essential for the model to learn any meaningful source separation, reducing training loss from divergent values to stable convergence.
+
+\paragraph{Log-Magnitude Transform.} We observed that raw magnitude spectrograms exhibit extreme sparsity, with over 99\% of values near zero (mean $\approx 0.003$). This causes the diffusion reverse process to produce unbounded predictions that collapse to boundary values after clamping. To address this, we apply a log-magnitude transform: $x_{\text{log}} = \log(1 + 1000 \cdot x) / \log(1001)$, which maps the sparse $[0, 1]$ distribution to a more uniform range suitable for diffusion.
+
+\paragraph{V-Prediction Parameterization.} Standard $\epsilon$-prediction learns to predict the noise added at each timestep. However, this objective exhibits high variance for sparse data where the signal-to-noise ratio varies dramatically across frequency bins. We implement v-prediction as an alternative, where the model predicts $v = \sqrt{\bar{\alpha}_t} \cdot \epsilon - \sqrt{1-\bar{\alpha}_t} \cdot x_0$. This parameterization provides more uniform gradient magnitudes across timesteps and has shown improved stability in related work.
+
+\subsection{Results}
+
+Table~\ref{tab:results} summarizes the source separation performance across all models and ablations. We report SDR in decibels with 95\% confidence intervals computed across tracks.
+
+\begin{table}[h]
+\centering
+\caption{Source separation performance (SDR in dB) on DSD100. Higher is better. Negative values indicate degradation compared to the input mixture. Values shown as mean $\pm$ 95\% CI.}
+\label{tab:results}
+\begin{tabular}{lcccc|c}
+\toprule
+\textbf{Model} & \textbf{Drums} & \textbf{Bass} & \textbf{Other} & \textbf{Vocals} & \textbf{Avg.} \\
+\midrule
+\multicolumn{6}{l}{\textit{Spectrogram Baselines}} \\
+U-Net & $-14.91\pm3.5$ & $-10.19\pm2.5$ & $-12.70\pm3.0$ & $-9.34\pm2.0$ & $-11.79$ \\
+U-Net (Balanced Init) & $0.43\pm1.05$ & $-0.37\pm1.16$ & $-1.77\pm0.75$ & $0.78\pm0.88$ & $-0.23$ \\
+\midrule
+\multicolumn{6}{l}{\textit{Diffusion Models (Ours)}} \\
+$\epsilon$-pred (linear) & $-13.16\pm4.03$ & $-26.79\pm14.56$ & $-22.56\pm24.35$ & $-26.29\pm21.15$ & $-22.20$ \\
+$\epsilon$-pred (log) & $-13.91\pm3.08$ & $-35.90\pm26.76$ & $-23.03\pm25.05$ & $-29.33\pm25.66$ & $-25.54$ \\
+v-pred (log) & $-13.32\pm5.00$ & $-23.77\pm12.58$ & $\mathbf{-11.00\pm3.22}$ & $\mathbf{-18.66\pm13.62}$ & $\mathbf{-16.69}$ \\
+\midrule
+\multicolumn{6}{l}{\textit{Waveform Models}} \\
+Demucs (trained) & $\mathbf{4.56\pm0.68}$ & $\mathbf{-1.26\pm6.55}$ & $-16.35\pm6.89$ & $-21.37\pm6.46$ & $-8.61$ \\
+Demucs (pretrained)$^\dagger$ & $12.07\pm4.22$ & $11.71\pm0.34$ & $8.87\pm3.23$ & $12.98\pm0.98$ & $11.41$ \\
+\bottomrule
+\end{tabular}
+\vspace{0.5em}
+
+\small{$^\dagger$Pretrained on large external dataset; included as reference upper bound.}
+\end{table}
+
+\subsection{Analysis and Discussion}
+
+\paragraph{Diffusion Models Underperform Deterministic Baselines.} Contrary to our hypothesis, the diffusion-based approaches do not outperform the simple deterministic U-Net baseline. Even with balanced initialization, the U-Net achieves $-0.23$ dB average SDR compared to $-16.69$ dB for our best diffusion variant. This result suggests that the generative modeling capacity of diffusion models does not translate to improved source separation on this task, at least under limited data conditions.
+
+\paragraph{V-Prediction Improves Over $\epsilon$-Prediction.} Among diffusion ablations, v-prediction with log-magnitude spectrograms achieves the best performance ($-16.69$ dB), improving substantially over $\epsilon$-prediction variants ($-22.20$ to $-25.54$ dB). The improvement is most pronounced on the ``other'' stem ($-11.00$ vs.\ $-22.56$ dB) and vocals ($-18.66$ vs.\ $-26.29$ dB). However, the log-magnitude transform alone does not help $\epsilon$-prediction, which actually degrades slightly, suggesting that v-prediction's gradient stability is the key factor.
+
+\paragraph{Spectrogram Sparsity Causes Diffusion Collapse.} Analysis of the diffusion outputs reveals a fundamental issue: the model produces bimodal predictions concentrated at boundary values (0 and 1) rather than meaningful spectrograms (Figure~\ref{fig:spectrogram_comparison}). With ground truth spectrograms having mean values around 0.003, the diffusion reverse process accumulates errors that push predictions to extremes. The large confidence intervals ($\pm14$--$25$ dB) reflect high variance across tracks, indicating unstable separation quality.
+
+\paragraph{Waveform Domain Outperforms Spectrogram Domain.} The trained Demucs model, despite identical training data (50 tracks), achieves substantially better results than all spectrogram-based approaches. Notably, Demucs achieves \textit{positive} SDR on drums ($+4.56$ dB), indicating actual source separation rather than degradation. This advantage likely stems from (1) avoiding the phase reconstruction problem inherent to magnitude spectrograms, and (2) the waveform representation having better-behaved statistics for neural network optimization.
+
+\paragraph{Data Scale is Critical.} The 23 dB gap between trained and pretrained Demucs ($-8.61$ vs.\ $+11.41$ dB) underscores the importance of training data scale. With only 50 tracks (~3 hours of music), all models trained from scratch struggle to generalize. The pretrained model, trained on orders of magnitude more data, achieves strong positive SDR across all stems.
+
+\paragraph{Limitations and Future Work.} Our diffusion approach has several limitations that future work could address. First, operating in latent space rather than raw spectrograms could provide better-conditioned inputs for diffusion. Second, mask-based prediction (predicting a soft mask to apply to the mixture) would naturally bound outputs and leverage mixture information more directly. Third, classifier-free guidance could improve sample quality by trading diversity for fidelity. Finally, substantially more training data appears necessary for diffusion models to realize their potential on this task.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{figures/spectrogram_comparison_all_stems.png}
+\caption{Spectrogram comparison for source separation. Top row: ground truth isolated sources. Bottom row: diffusion model ($\epsilon$-prediction) outputs. The model produces bimodal outputs concentrated at boundary values rather than meaningful source estimates, explaining the poor SDR scores.}
+\label{fig:spectrogram_comparison}
+\end{figure}

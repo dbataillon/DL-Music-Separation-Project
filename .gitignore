@@ -1,14 +1,52 @@
-.idea/*
-__pycache__
-*.pyc
-*.wav
-./data
-./Spectrogram
-./model
-./model_*
-.ipynb_checkpoints
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
 .DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+.ipynb_checkpoints/
+
+# Large data directories (142GB+ models, 21GB data, 2.6GB spectrograms)
+model/
 data/
-./audio_out
-./logs
-./samples
+Spectrogram/
+
+# Audio files
+*.wav
+*.mp3
+*.flac
+audio_out/
+
+# Samples and outputs
+samples/
+samples2/
+samples_comparison/
+
+# Logs
+logs/
+*.log
+*.err
+*.out
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Environment
+.env
+.venv/
+env/
+venv/

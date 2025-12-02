@@ -1,4 +1,4 @@
-# Training_diffusion.py - Train diffusion model for music source separation
+# Training_diffusion_vpred.py - Train diffusion model with V-PREDICTION for music source separation
 import gc
 import json
 import math
@@ -24,7 +24,7 @@ from preprocessing.util import (
 )
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_MODEL_DIR = PROJECT_ROOT / "model" / "diffusion"
+DEFAULT_MODEL_DIR = PROJECT_ROOT / "model" / "diffusion_vpred"
 
 
 def make_cosine_schedule(T=100, s=0.008):
@@ -137,7 +137,11 @@ def get_base_state_dict(model: torch.nn.Module):
 
 
 def train_one_epoch(model, loader, optimizer, device, betas, alphas_bar, T, accum_steps=2):
-    """Train for one epoch with gradient accumulation."""
+    """Train for one epoch using V-PREDICTION objective with gradient accumulation.
+    
+    V-prediction predicts: v = sqrt(alpha_bar) * eps - sqrt(1 - alpha_bar) * x0
+    This provides more stable gradients across timesteps than epsilon-prediction.
+    """
     model.train()
     running_loss = 0.0
     n_samples = 0
@@ -151,14 +155,19 @@ def train_one_epoch(model, loader, optimizer, device, betas, alphas_bar, T, accu
         bsz = y_clean.size(0)
         t_int = torch.randint(0, T, (bsz,), device=device)
         a_bar = alphas_bar[t_int].view(bsz, 1, 1, 1)  # (B,1,1,1)
+        sqrt_a_bar = a_bar.sqrt()
+        sqrt_one_minus_a_bar = (1.0 - a_bar).sqrt()
 
         # Add noise according to forward diffusion process
         eps = torch.randn_like(y_clean)
-        y_noisy = a_bar.sqrt() * y_clean + (1.0 - a_bar).sqrt() * eps
+        y_noisy = sqrt_a_bar * y_clean + sqrt_one_minus_a_bar * eps
 
-        # Predict the noise
-        eps_hat = model(y_noisy, mix_mag, t_int)  # (B,4,H,W)
-        loss = F.mse_loss(eps_hat, eps)
+        # Compute v-prediction target: v = sqrt(alpha_bar) * eps - sqrt(1 - alpha_bar) * x0
+        v_target = sqrt_a_bar * eps - sqrt_one_minus_a_bar * y_clean
+
+        # Model predicts v instead of epsilon
+        v_hat = model(y_noisy, mix_mag, t_int)  # (B,4,H,W)
+        loss = F.mse_loss(v_hat, v_target)
         
         # Scale loss for gradient accumulation
         loss = loss / accum_steps

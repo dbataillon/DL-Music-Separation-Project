@@ -1102,3 +1102,10 @@ y.shape :  (26478, 512, 128, 4)
 [Epoch 161/300] loss=0.012634 | lr=1.00e-06 | saved: /storage/ice1/5/1/etarr7/DL-Music-Separation-Project/model/diffusion/checkpoint_epoch_0161.pt | 264.2s
 X.shape :  (26478, 512, 128, 1)
 y.shape :  (26478, 512, 128, 4)
+Using device: cuda
+number of parameters: 11814636
+No checkpoint found. Starting fresh training from epoch 1
+Loading spectrograms...
+Loaded 50 mixtures with mix shape (513, 4378) and stems (4, (513, 4378))
+X.shape :  (26478, 512, 128, 1)
+y.shape :  (26478, 512, 128, 4)

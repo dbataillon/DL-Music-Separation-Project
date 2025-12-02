@@ -1,4 +1,4 @@
-"""Sample stems from the diffusion model for a single spectrogram."""
+"""Sample stems from the V-PREDICTION diffusion model for a single spectrogram."""
 import argparse
 import math
 import sys
@@ -61,6 +61,10 @@ def get_device():
     return torch.device("cpu")
 
 
+# Default model directory for v-prediction
+DEFAULT_VPRED_MODEL_DIR = "model/diffusion_vpred"
+
+
 def get_latest_checkpoint(model_dir: Path) -> Path:
     ckpts = sorted(model_dir.glob("checkpoint_epoch_*.pt"))
     if not ckpts:
@@ -107,23 +111,43 @@ def prepare_mix_batches(mix: np.ndarray, stride: int) -> tuple:
     return batch, segments, width
 
 
-def ddim_step(model, x, mix, t, betas, alphas, alphas_bar):
+def ddim_step_vpred(model, x, mix, t, betas, alphas, alphas_bar):
+    """DDIM step using v-prediction.
+    
+    From v, we can recover both x0 and epsilon:
+        x0 = sqrt(alpha_bar) * x_t - sqrt(1 - alpha_bar) * v
+        eps = sqrt(alpha_bar) * v + sqrt(1 - alpha_bar) * x_t
+    """
     beta_t = betas[t]
     alpha_t = alphas[t]
     alpha_bar_t = alphas_bar[t]
+    sqrt_a_bar = torch.sqrt(alpha_bar_t)
+    sqrt_one_minus_a_bar = torch.sqrt(1 - alpha_bar_t)
+    
     t_tensor = torch.full((x.size(0),), t, device=x.device, dtype=torch.long)
 
-    eps_theta = model(x, mix, t_tensor)
+    # Model predicts v
+    v_theta = model(x, mix, t_tensor)
+    
+    # Recover x0 from v: x0 = sqrt(alpha_bar) * x_t - sqrt(1 - alpha_bar) * v
+    x0_pred = sqrt_a_bar * x - sqrt_one_minus_a_bar * v_theta
+    
+    # Recover epsilon from v: eps = sqrt(alpha_bar) * v + sqrt(1 - alpha_bar) * x_t
+    eps_pred = sqrt_a_bar * v_theta + sqrt_one_minus_a_bar * x
+    
+    # Standard DDPM reverse step using recovered epsilon
     coeff1 = 1.0 / torch.sqrt(alpha_t)
-    coeff2 = beta_t / torch.sqrt(1 - alpha_bar_t)
-    mean = coeff1 * (x - coeff2 * eps_theta)
+    coeff2 = beta_t / sqrt_one_minus_a_bar
+    mean = coeff1 * (x - coeff2 * eps_pred)
+    
     if t > 0:
         noise = torch.randn_like(x)
         sigma = torch.sqrt(beta_t)
         x = mean + sigma * noise
     else:
         x = mean
-    # Clamp to valid spectrogram range [0, 1] at each step
+    
+    # Clamp to valid log-spectrogram range [0, 1] at each step
     x = x.clamp(0.0, 1.0)
     return x
 
@@ -146,7 +170,7 @@ def sample_stems(model, mix_batch, betas):
     model.eval()
     with torch.no_grad():
         for t in reversed(range(T)):
-            x = ddim_step(model, x, mix_t, t, betas, alphas, alphas_bar)
+            x = ddim_step_vpred(model, x, mix_t, t, betas, alphas, alphas_bar)
     
     # Convert back from log to linear magnitude
     x = log_to_linear_magnitude(x)
@@ -185,10 +209,10 @@ def save_audio_predictions(pred, mix_audio_path: Path, out_dir: Path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Run diffusion sampling for one spectrogram")
+    parser = argparse.ArgumentParser(description="Run V-PREDICTION diffusion sampling for one spectrogram")
     parser.add_argument("spectrogram", type=str, help="Path to .npz spectrogram (with 'mix')")
     parser.add_argument("--checkpoint", type=str, default=None, help="Path to diffusion checkpoint")
-    parser.add_argument("--model-dir", type=str, default="model/diffusion", help="Directory with checkpoints")
+    parser.add_argument("--model-dir", type=str, default=DEFAULT_VPRED_MODEL_DIR, help="Directory with checkpoints")
     parser.add_argument("--output", type=str, default=None, help="Path to save predicted stems (.npz)")
     parser.add_argument("--timesteps", type=int, default=200, help="Number of diffusion steps (T)")
     parser.add_argument(

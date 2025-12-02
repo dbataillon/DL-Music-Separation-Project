@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=diff-eps-log
-#SBATCH --output=logs/diffusion-eps-log-%j.out
-#SBATCH --error=logs/diffusion-eps-log-%j.err
+#SBATCH --job-name=diff-vpred-log
+#SBATCH --output=logs/diffusion-vpred-log-%j.out
+#SBATCH --error=logs/diffusion-vpred-log-%j.err
 #SBATCH --time=08:00:00
 #SBATCH --qos=coc-ice
 #SBATCH --partition=coc-gpu
@@ -10,7 +10,7 @@
 #SBATCH --gres=gpu:V100:1
 #SBATCH --mem=48G
 
-# Epsilon-prediction diffusion with log-magnitude spectrograms
+# V-prediction diffusion with log-magnitude spectrograms
 
 set -euo pipefail
 
@@ -22,7 +22,7 @@ conda activate freqnet
 PROJECT_DIR="/home/hice1/etarr7/scratch/DL-Music-Separation-Project"
 
 mkdir -p "${PROJECT_DIR}/logs"
-mkdir -p "${PROJECT_DIR}/model/diffusion"
+mkdir -p "${PROJECT_DIR}/model/diffusion_vpred"
 
 cd "${PROJECT_DIR}"
 
@@ -34,11 +34,11 @@ fi
 
 # To use multiple GPUs, change --gres=gpu:V100:2 in the SBATCH header above
 NUM_GPUS=${SLURM_GPUS_ON_NODE:-1}
-echo "[$(date)] Starting EPSILON-PREDICTION diffusion training with LOG spectrograms"
+echo "[$(date)] Starting V-PREDICTION diffusion training with LOG spectrograms"
 echo "[$(date)] Using $NUM_GPUS GPU(s)"
-echo "[$(date)] Checkpoints will be saved to model/diffusion/"
+echo "[$(date)] Checkpoints will be saved to model/diffusion_vpred/"
 echo "[$(date)] Training will resume from last checkpoint if available"
 
-python -u -m training.Training_diffusion 2>&1 | tee -a logs/diffusion-eps-log-progress.log
+python -u -m training.Training_diffusion_vpred 2>&1 | tee -a logs/diffusion-vpred-log-progress.log
 
-echo "[$(date)] Diffusion training finished"
+echo "[$(date)] V-prediction diffusion training finished"
